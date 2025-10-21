@@ -1,0 +1,3 @@
+@for (fruta of frutas; track fruta) {
+    <app-tarjeta [frutita]="fruta"></app-tarjeta>
+}

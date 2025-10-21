@@ -1,0 +1,23 @@
+.mensaje-error{
+    color: red;
+    size: small;
+}
+.contenedor-campo{
+    display: flex;
+    flex-direction: column;
+}
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1; 
+}
+.carta{
+    display: flex;
+    gap: 5%;
+    width: 200px;
+    border-radius: 0%;
+}
