@@ -1,1 +1,5 @@
-<p>lista works!</p>
+<div class = "artistas">
+    @for (cantante of cantantes; track cantante) {
+        <app-tarjeta [artista] ="cantante"></app-tarjeta>
+    }
+</div>

@@ -1,0 +1,44 @@
+.cantante {
+  background-color: red;
+  font-size: 15px;
+  display: flex;
+  flex-direction: row;
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.titulo{
+    display:flex;
+    flex-direction: row;
+    gap:15px;
+}
+
+.stars{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    row-gap: 10px;
+}
+.fotos{
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; 
+    gap: 10px;
+}
+.leer{
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    line-height: normal;
+    width: 200px;
+}
+.separador{
+    flex-direction: column;
+    display: flex;
+    margin-bottom: 5%;
+}
+.red {
+    background-color: red;
+}
+  

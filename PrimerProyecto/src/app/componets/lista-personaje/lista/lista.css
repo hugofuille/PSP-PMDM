@@ -1,3 +1,16 @@
-@for (fruta of frutas; track fruta) {
-    <app-tarjeta [frutita]="fruta"></app-tarjeta>
+.artistas{
+    align-items:start;
+    display: grid;
+    flex-direction: row; 
+    gap: 20px;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+}
+
+.cantantes{
+    align-items: center;
+    display: flex;
+
+    
 }

@@ -2,8 +2,13 @@
   flex: 1 1 auto;
 }
 .opcion{
-    cursor: pointer;
+  cursor: pointer;
+  display : flex;
+    
 }
 .opcion:hover{
-        font-weight: 700;
+  font-weight: 700;
+}
+.nav-halloween{
+  background-color: blueviolet;
 }

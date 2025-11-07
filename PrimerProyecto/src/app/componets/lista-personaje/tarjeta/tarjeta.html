@@ -1,1 +1,29 @@
-<p>tarjeta works!</p>
+<cdk-accordion class="example-accordion">
+    <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item">
+        <mat-card appearance="outlined" class = "red" (click)="accordionItem.toggle()">
+            <mat-card-header>
+                <div class = "titulo">
+                    <div class = "separador">
+                        <p>{{artista.name}}</p>
+                        <div class = "stars">
+                            <mat-icon *ngFor="let s of [].constructor(artista.stars); let j = index">star</mat-icon>
+                        </div>
+                    </div>
+                </div>
+                <div class = "fotos">
+                    <img src={{artista.photo}} type="jpeg" width="75">
+                </div>
+            </mat-card-header>
+            @if(accordionItem.expanded) {
+                <mat-card-content>
+                    <hr>
+                    <div class = "leer">
+                        
+                        <p>{{artista.description}}</p>
+                        <p>{{artista.type}}</p>
+                    </div>
+                </mat-card-content>
+            }
+        </mat-card>
+    </cdk-accordion-item>
+</cdk-accordion>
