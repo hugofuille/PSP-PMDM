@@ -1,3 +1,4 @@
+
 .example-spacer {
   flex: 1 1 auto;
 }
@@ -7,8 +8,19 @@
     
 }
 .opcion:hover{
-  font-weight: 700;
+  font-weight: 100%;
 }
 .nav-halloween{
   background-color: blueviolet;
+}
+.nav-navidad{
+  background-color: #00d9ffff;
+}
+.theme-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 5%;
+}
+.nav-normal{
+  background-color: red;
 }

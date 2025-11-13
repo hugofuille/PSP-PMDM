@@ -20,6 +20,30 @@ export class NavBar {
 
   pi:string="pi pi piiiiiiiiii";
 
-  esHalloween:boolean = true;
+  esHalloween = false;
+  esNavidad = false;
+  esNormal = true;
 
+  setTheme(theme: string) {
+    if (theme === 'halloween') {
+      this.esHalloween = true;
+      this.esNavidad = false;
+      this.esNormal = false;
+      document.body.style.backgroundColor = '#4B0082'; 
+    } else if (theme === 'navidad') {
+      this.esNavidad = true;
+      this.esHalloween = false;
+      this.esNormal = false;
+      document.body.style.backgroundColor = '#00d9ffff'; 
+    } else if (theme === "normal"){
+      this.esHalloween = false;
+      this.esNavidad = false;
+      this.esNormal = true
+      document.body.style.backgroundColor = '#ff0000ff';
+    }
+  }
 }
+
+
+
+
