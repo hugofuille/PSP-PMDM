@@ -1,7 +1,6 @@
-<mat-toolbar color="secondary" [ngClass]="{ 'nav-halloween': esHalloween }">
-<mat-toolbar color="" [ngClass]="{ 'nav-navidad': esNavidad }">
-<mat-toolbar color="primary" [ngClass]="{ 'nav-normal': esNormal }">
-  
+<mat-toolbar color="primary" [ngClass]="{ 'nav-normal': esNormal, 'nav-halloween': esHalloween,'nav-navidad': esNavidad }">
+
+
   <span class="opcion opcion1" matButton [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></span>
     <mat-menu class #menu="matMenu">
       <button mat-menu-item routerLink="/">Inicio</button>
@@ -14,14 +13,15 @@
   <span class="example-spacer"></span>
   <div class="theme-bar">
   <mat-slide-toggle [(ngModel)]="esNormal" (change)="setTheme('normal')">
-    Normal
+  Normal
   </mat-slide-toggle>
   <mat-slide-toggle [(ngModel)]="esHalloween" (change)="setTheme('halloween')">
-   🎃
+  🎃
   </mat-slide-toggle>
   <mat-slide-toggle [(ngModel)]="esNavidad" (change)="setTheme('navidad')">
-    🎄
+  🎄
   </mat-slide-toggle>
 </div>
-
 </mat-toolbar>
+
+<video id="bg-video" autoplay loop muted playsinline></video>

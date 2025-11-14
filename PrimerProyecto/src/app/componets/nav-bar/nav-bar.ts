@@ -25,11 +25,16 @@ export class NavBar {
   esNormal = true;
 
   setTheme(theme: string) {
+
+     const video: HTMLVideoElement = document.getElementById("bg-video") as HTMLVideoElement;
+
     if (theme === 'halloween') {
       this.esHalloween = true;
       this.esNavidad = false;
       this.esNormal = false;
-      document.body.style.backgroundColor = '#4B0082'; 
+
+      video.src = "/fuego.mp4";
+
     } else if (theme === 'navidad') {
       this.esNavidad = true;
       this.esHalloween = false;
@@ -41,6 +46,7 @@ export class NavBar {
       this.esNormal = true
       document.body.style.backgroundColor = '#ff0000ff';
     }
+    video.play();
   }
 }
 
