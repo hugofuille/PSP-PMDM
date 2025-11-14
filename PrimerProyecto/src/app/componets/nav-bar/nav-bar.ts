@@ -26,27 +26,22 @@ export class NavBar {
 
   setTheme(theme: string) {
 
-     const video: HTMLVideoElement = document.getElementById("bg-video") as HTMLVideoElement;
-
     if (theme === 'halloween') {
       this.esHalloween = true;
       this.esNavidad = false;
       this.esNormal = false;
-
-      video.src = "/fuego.mp4";
-
+      document.body.style.backgroundImage = "url('/halloween.webp')";
     } else if (theme === 'navidad') {
       this.esNavidad = true;
       this.esHalloween = false;
       this.esNormal = false;
-      document.body.style.backgroundColor = '#00d9ffff'; 
+      document.body.style.backgroundImage = "url('/navidad.png')";
     } else if (theme === "normal"){
       this.esHalloween = false;
       this.esNavidad = false;
       this.esNormal = true
-      document.body.style.backgroundColor = '#ff0000ff';
+      document.body.style.backgroundColor = 'white';
     }
-    video.play();
   }
 }
 
