@@ -39,8 +39,8 @@ export class NavBar {
     } else if (theme === "normal"){
       this.esHalloween = false;
       this.esNavidad = false;
-      this.esNormal = true;
-      document.body.style.backgroundImage = "url('/blanco.png')"; //Lo sé, es una foto en blanco, pero lo importante es que cambia.
+      this.esNormal = true
+      document.body.style.backgroundImage = "";
     }
   }
 }
