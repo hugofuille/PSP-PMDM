@@ -1,7 +1,7 @@
-<cdk-accordion class="example-accordion">
-    <cdk-accordion-item #accordionItem="cdkAccordionItem" class="example-accordion-item">
-        <mat-card appearance="outlined"  (click)="accordionItem.toggle()">
-            <mat-card-header>
+<cdk-accordion>
+    <cdk-accordion-item #accordionItem="cdkAccordionItem">
+        <mat-card appearance="outlined"  (click)="accordionItem.toggle()" class ="cantante" [style.background-color] = "artista.getColor()">
+            <mat-card-header class="hed">
                 <div class = "titulo">
                     <div class = "separador">
                         <p>{{artista.name}}</p>

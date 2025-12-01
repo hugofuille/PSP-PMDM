@@ -14,4 +14,20 @@ export class Cantante{
         this.type = type;
        
     }
+
+    getColor():String{
+        switch(this.type){
+            case "Dragona":
+                return "#FF0080";
+            case "Mariposa":
+                return "#0000FF";
+            case "Motomami":
+                return "#f00";
+            case "Reguetonera":
+                return "#EABE3F ";
+            case "Belladrama":
+                return "#b9f2ff";
+        }
+        return "#f00";
+    }
 }
