@@ -5,12 +5,13 @@ import { Matatopos } from './componets/matatopos/matatopos';
 import { NavBar } from './componets/nav-bar/nav-bar';
 import { Carrera } from './componets/carrera/carrera';
 import { Pages } from './componets/pages/pages';
+import { Clicker } from './componets/clicker/clicker';
 
 
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Pages, Contador, Matatopos, NavBar, Carrera],
+  imports: [RouterOutlet, Pages, Contador, Matatopos, NavBar, Carrera,Clicker],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
