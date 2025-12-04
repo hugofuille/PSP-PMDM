@@ -1,21 +1,7 @@
-<html>
-<body style="text-align:center; font-family:sans-serif;">
+<div class="cookiecontainer">
+  <h1>COOKIE CLICKER</h1>
+  <p id="contador">{{numero}}</p>
+    <button (click)="sumar()" class="boton" >
+  </button>
+</div>
 
-<h1>Cookie Clicker</h1>
-
-<h2 id="contador">0</h2>
-
-<button onclick="sumar()" style="font-size:30px; padding:20px;">
-  🍪 Click aquí
-</button>
-
-<script>
-  let puntos = 0;
-  function sumar() {
-    puntos++;
-    document.getElementById("contador").textContent = puntos;
-  }
-</script>
-
-</body>
-</html>

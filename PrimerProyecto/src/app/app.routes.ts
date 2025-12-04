@@ -6,6 +6,7 @@ import { FormularioRegistro } from './formulario-registro/formulario-registro';
 import { Pages } from './componets/pages/pages';
 import { lista } from './componets/lista-personaje/lista/lista';
 import { Noria } from './componets/noria/noria';
+import { Clicker } from './componets/clicker/clicker';
 
 
 
@@ -17,5 +18,7 @@ export const routes: Routes = [
     { path: '', component: Pages},     
     { path: 'lista', component: lista},
     { path: 'noria', component: Noria},
+    { path: 'clicker', component: Clicker},
+
 
 ];

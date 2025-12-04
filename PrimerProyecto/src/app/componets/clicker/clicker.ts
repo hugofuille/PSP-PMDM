@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './clicker.css'
 })
 export class Clicker {
+  public numero : number = 0;
+
+  sumar(){
+    this.numero++;
+  }
+
 }
+
