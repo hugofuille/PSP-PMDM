@@ -1,1 +1,78 @@
-<p>kanban-board works!</p>
+<div class="kanban-container">
+  <h1>Tablero Kanban 🚀</h1>
+  
+  <div class="new-task-form">
+    <h2>Añadir Nueva Tarea</h2>
+    <input type="text" [(ngModel)]="nuevaTarea.titulo" placeholder="Título (Obligatorio)" required>
+    <textarea [(ngModel)]="nuevaTarea.descripcion" placeholder="Descripción"></textarea>
+    <button (click)="addTask()" [disabled]="!nuevaTarea.titulo.trim()">Añadir a To Do</button>
+  </div>
+
+  <div class="kanban-columns-wrapper">
+    
+    <div class="column todo-column">
+      <h3>To Do ({{ todo.length }})</h3>
+      <div 
+        cdkDropList
+        #todoList="cdkDropList"                           
+        [cdkDropListData]="todo"                          
+        [cdkDropListConnectedTo]="[doingList, doneList]"  class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        
+        <div class="task-card" *ngFor="let task of todo" cdkDrag>
+          <div class="card-header">
+            <h4>{{ task.titulo }}</h4>
+            <button class="btn-delete" (click)="deleteTask(task, todo)">❌</button>
+          </div>
+          
+          <button class="btn-toggle-desc" (click)="toggleDescription(task)">
+            {{ task.mostrarDescripcion ? 'Ocultar Descripción' : 'Mostrar Descripción' }}
+          </button>
+          
+          <p *ngIf="task.mostrarDescripcion" class="description">{{ task.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column doing-column">
+      <h3>Doing ({{ doing.length }})</h3>
+      <div 
+        cdkDropList
+        #doingList="cdkDropList"                         
+        [cdkDropListData]="doing"                         
+        [cdkDropListConnectedTo]="[todoList, doneList]"   class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        
+        <div class="task-card" *ngFor="let task of doing" cdkDrag>
+          <div class="card-header">
+            <h4>{{ task.titulo }}</h4>
+            <button class="btn-delete" (click)="deleteTask(task, doing)">❌</button>
+          </div>
+          <button class="btn-toggle-desc" (click)="toggleDescription(task)">
+            {{ task.mostrarDescripcion ? 'Ocultar Descripción' : 'Mostrar Descripción' }}
+          </button>
+          <p *ngIf="task.mostrarDescripcion" class="description">{{ task.descripcion }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column done-column">
+      <h3>Done ({{ done.length }})</h3>
+      <div 
+        cdkDropList
+        #doneList="cdkDropList" 
+        [cdkDropListData]="done"                          
+        [cdkDropListConnectedTo]="[todoList, doingList]"  class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        
+        <div class="task-card done" *ngFor="let task of done" cdkDrag>
+          <div class="card-header">
+            <h4>{{ task.titulo }}</h4>
+            <button class="btn-delete" (click)="deleteTask(task, done)">❌</button>
+          </div>
+          <button class="btn-toggle-desc" (click)="toggleDescription(task)">
+            {{ task.mostrarDescripcion ? 'Ocultar Descripción' : 'Mostrar Descripción' }}
+          </button>
+          <p *ngIf="task.mostrarDescripcion" class="description">{{ task.descripcion }}</p>
+        </div>
+      </div>

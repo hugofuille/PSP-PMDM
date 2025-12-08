@@ -1,50 +1,103 @@
-<mat-card class = "carta">
-    <form [formGroup]="formulario" (ngSubmit)="mostrar()">
+<div class="halloween-container">
+  
+  <div class="contador-area">
+    <h2>Cuenta Regresiva </h2>
+    <ng-container *ngIf="contadorSegundos > 0">
+      <p class="contador">{{ contadorSegundos }} segundos restantes...</p>
+    </ng-container>
+    <ng-container *ngIf="contadorSegundos === 0">
+      <p class="bug-message">🕛 ¡La noche de los bugs ha comenzado!</p>
+    </ng-container>
+  </div>
+
+  <h1 class="titulo-terror">Registro de Asistentes al Castillo 🏰</h1>
+
+  <div *ngIf="envioExitoso" class="mensaje-exito">
+     ¡Bienvenido/a, {{ nombreAsistente }}! Tu entrada para la fiesta del castillo ha sido registrada con éxito.
+  
+  <button (click)="reiniciarRegistro()" class="btn-volver-registro">
+      💀 Registrar otro Asistente
+  </button>
+  </div>
+
+  <form [formGroup]="asistenteForm" (ngSubmit)="onSubmit()" *ngIf="!envioExitoso" class="formulario-terror">
     
-
-    <div class="contenedor-campo">
-        <label for="nombre">Nombre:</label>
-    <input id="nombre" formControlName="nombre">
-    @if(formulario.controls['nombre'].touched){
-    <div class="mensaje-error">
-        @if(formulario.controls['nombre'].hasError('required')) { <p>El campo nombre es obligatorio</p> }
-        @if(formulario.controls['nombre'].hasError('minlength')) { <p>Mínimo 3 letras</p> }
-        @if(formulario.controls['nombre'].hasError('maxlength')) { <p>Máximo 10 letras</p> }
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" formControlName="nombre"
+             [class.error-sangriento]="campoInvalido('nombre')">
+      
+      <div *ngIf="campoInvalido('nombre')" class="error-mensaje">
+        <p *ngIf="asistenteForm.get('nombre')?.errors?.['required']">
+          👻 Este campo da más miedo vacío, ¡rellénalo!
+        </p>
+        <p *ngIf="asistenteForm.get('nombre')?.errors?.['minlength']">
+          🕸️ Necesitas al menos 3 telarañas (caracteres).
+        </p>
+      </div>
     </div>
-    }
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email"
+             [class.error-sangriento]="campoInvalido('email')">
+
+      <div *ngIf="campoInvalido('email')" class="error-mensaje">
+        <p *ngIf="asistenteForm.get('email')?.errors?.['required']">
+          👻 Este campo da más miedo vacío, ¡rellénalo!
+        </p>
+        <p *ngIf="asistenteForm.get('email')?.errors?.['email']">
+          🩸 Ese correo parece maldito… revisa el formato.
+        </p>
+      </div>
     </div>
 
+    <div class="form-group">
+      <label for="tipoInvitado">Tipo de Ser</label>
+      <select id="tipoInvitado" formControlName="tipoInvitado"
+              [class.error-sangriento]="campoInvalido('tipoInvitado')">
+        <option value="" disabled>Selecciona tu forma</option>
+        <option *ngFor="let tipo of tiposInvitado" [value]="tipo">{{ tipo }}</option>
+      </select>
+      
+      <div *ngIf="campoInvalido('tipoInvitado')" class="error-mensaje">
+        <p>👻 Este campo da más miedo vacío, ¡rellénalo!</p>
+      </div>
+    </div>
 
-    <div class="contenedor-campo">
-    <label for="email">Email:</label>
-    <input id="email" formControlName="email">
-    @if(formulario.controls['email'].touched){
-    <div class="mensaje-error">
-        @if(formulario.controls['email'].hasError('required')) { El campo email es obligatorio }
-        @if(formulario.controls['email'].hasError('email')) { No cumple con el formato de un email }
-        @if(formulario.controls['email'].hasError('minlength')) { Mínimo 3 letras }
-    </div>  
-        }   
-        </div>
+    <div class="form-group">
+      <label for="disfraz">Disfraz</label>
+      <input type="text" id="disfraz" formControlName="disfraz"
+             [class.error-sangriento]="campoInvalido('disfraz')">
 
+      <div *ngIf="campoInvalido('disfraz')" class="error-mensaje">
+        <p>👻 Este campo da más miedo vacío, ¡rellénalo!</p>
+      </div>
+    </div>
 
-    <div class="contenedor-campo">
-    <label for="edad">Edad:</label>
-    <input type="number" id="edad" formControlName="edad">
-    @if(formulario.controls['edad'].touched){
-    <div class="mensaje-error">
-        @if(formulario.controls['edad'].hasError('required')) { El campo edad es obligatorio }
-        @if(formulario.controls['edad'].hasError('min')) { La edad no es válida }
-    </div>  
-        }   
-        </div>
+    <div class="form-group">
+      <label for="fechaLlegada">Fecha de Llegada</label>
+      <input type="date" id="fechaLlegada" formControlName="fechaLlegada"
+             [class.error-sangriento]="campoInvalido('fechaLlegada')">
+      
+      <div *ngIf="campoInvalido('fechaLlegada')" class="error-mensaje">
+        <p>👻 Este campo da más miedo vacío, ¡rellénalo!</p>
+      </div>
+    </div>
 
+    <div class="form-group-checkbox">
+      <input type="checkbox" id="aceptaReglas" formControlName="aceptaReglas"
+             [class.error-sangriento-checkbox]="campoInvalido('aceptaReglas')">
+      <label for="aceptaReglas">Prometo no morder a los demás invitados</label>
+      
+      <div *ngIf="campoInvalido('aceptaReglas')" class="error-mensaje">
+        <p>⚠️ Debes aceptar la regla para entrar al castillo.</p>
+      </div>
+    </div>
 
+    <button type="submit" [disabled]="asistenteForm.invalid" class="btn-enviar">
+      Registrarme al Aquelarre
+    </button>
+  </form>
 
-    <button type="submit">Enviar</button>
-    <button type="button" (click)="resetear()">Resetear</button>
-    </form>
-</mat-card>
-<video autoplay muted loop playsinline class="background-video">
-  <source src="/135387-761676458.mp4" type="video/mp4" />
-</video>
+</div>
