@@ -1,7 +1,28 @@
 <div class="cookiecontainer">
-  <h1>COOKIE CLICKER</h1>
-  <p id="contador">{{numero}}</p>
-    <button (click)="sumar()" class="boton" >
-  </button>
-</div>
+    <h1>COOKIE CLICKER</h1>
+    
+    <p id="contador">{{ numero | number:'1.0-1' }} Galletas</p> 
+    <p class="cps-display">Ganancia Pasiva: {{ cps | number:'1.0-1' }} CPS</p>
 
+    <button (click)="sumar()" class="boton"></button>
+
+    <hr>
+    
+    <div class="mejoras-container">
+        <h2>Tienda de Mejoras</h2>
+        
+        <div class="mejora-card" 
+             *ngFor="let mejora of mejorasDisponibles">
+            
+            <p class="mejora-titulo">{{ mejora.nombre }} (x{{ mejora.cantidad }})</p>
+            <p class="mejora-stats">+{{ mejora.gananciaPorSegundo }} CPS | Costo: {{ mejora.costo }}</p>
+            
+            <button 
+                (click)="comprarMejora(mejora)" 
+                [disabled]="numero < mejora.costo" 
+                class="btn-comprar">
+                Comprar
+            </button>
+        </div>
+    </div>
+</div>
