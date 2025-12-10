@@ -44,7 +44,6 @@ export class KanbanBoard implements OnInit {
       this.nextId = Math.max(...allTasks.map(t => t.id)) + 1;
     }
   }
-
   drop(event: CdkDragDrop<Tarea[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);

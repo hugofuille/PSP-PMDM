@@ -16,13 +16,13 @@
     </mat-menu>
   <span class="example-spacer"></span>
   <div class="theme-bar">
-  <mat-slide-toggle [(ngModel)]="esNormal" (change)="setTheme('normal')">
+  <mat-slide-toggle [(ngModel)]="esNormal" (change)="ponerNormal()">
   Normal
   </mat-slide-toggle>
-  <mat-slide-toggle [(ngModel)]="esHalloween" (change)="setTheme('halloween')">
+  <mat-slide-toggle [(ngModel)]="esHalloween" (change)="ponerHalloween()">
   🎃
   </mat-slide-toggle>
-  <mat-slide-toggle [(ngModel)]="esNavidad" (change)="setTheme('navidad')">
+  <mat-slide-toggle [(ngModel)]="esNavidad" (change)="ponerNavidad()">
   🎄
   </mat-slide-toggle>
 </div>
