@@ -44,11 +44,11 @@ export class NavBar  {
       this.esHalloween = false;
       this.esNormal = false;
       document.body.style.backgroundImage = "url('/navidad.jpg')";
-    } else if (theme === temas.normal){
+    } else if(theme === temas.normal){
       this.esHalloween = false;
       this.esNavidad = false;
       this.esNormal = true;
-      document.body.style.backgroundImage = "";
+      document.body.style.background = "linear-gradient(to bottom, #616161ff, #000)";
     }
 
   }
