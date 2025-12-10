@@ -47,8 +47,13 @@ export class NavBar  {
     } else if (theme === temas.normal){
       this.esHalloween = false;
       this.esNavidad = false;
+<<<<<<< Updated upstream
       this.esNormal = true;
       document.body.style.backgroundImage = "";
+=======
+      this.esNormal = true
+      document.body.style.backgroundImage = "url('/blanco.jpg')";
+>>>>>>> Stashed changes
     }
 
   }
