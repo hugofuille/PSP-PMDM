@@ -1,72 +1,287 @@
-.boton{
-    height: 60px;
-    width: 60px;
-    font-size: 100%;
+/* --- 1. CONFIGURACIÓN GLOBAL Y PANTALLA COMPLETA --- */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%; /* Asegura que el cuerpo ocupe todo el ancho */
+    height: 100%; 
+    overflow-x: hidden; 
+}
+
+.juego-container {
+    /* Nueva propiedad clave para asegurar 100% del ancho */
+    width: 100%; 
+    
+    /* Estructura de 3 columnas (ESCRITORIO) */
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start;
+    
+    gap: 20px;
+    /* Padding vertical, pero CERO en horizontal para pegar paneles */
+    padding: 20px 0; 
+    
+    background-color: #333; 
+    /* PROPIEDADES CLAVE PARA NO-SCROLL PRINCIPAL: */
+    height: 100vh; 
+    overflow: hidden; 
+    
+    color: #eee;
+    font-family: sans-serif;
+}
+
+/* --- 2. PANELES LATERALES (PEGADOS Y SCROLLABLES) --- */
+.panel-izquierdo {
+    width: 25%; 
+    min-width: 280px;
+    background-color: #222; 
+    padding: 15px;
+    
+    /* Pega el panel a la izquierda */
+    margin-left: 0; 
+    border-radius: 0 8px 8px 0; /* Bordes redondeados solo a la derecha */
+    border: 1px solid #555;
+    border-left: none; /* Quitamos el borde izquierdo */
+
+    /* PROPIEDADES CLAVE PARA SCROLL INTERNO: */
+    flex-grow: 1; 
+    max-height: calc(100vh - 40px); 
+    overflow-y: auto; 
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5); /* Sombra solo a la derecha */
+}
+
+.panel-derecho {
+    width: 25%; 
+    min-width: 280px;
+    background-color: #222; 
+    padding: 15px;
+    
+    /* Pega el panel a la derecha */
+    margin-right: 0; 
+    border-radius: 8px 0 0 8px; /* Bordes redondeados solo a la izquierda */
+    border: 1px solid #555;
+    border-right: none; /* Quitamos el borde derecho */
+
+    /* PROPIEDADES CLAVE PARA SCROLL INTERNO: */
+    flex-grow: 1; 
+    max-height: calc(100vh - 40px); 
+    overflow-y: auto; 
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.5); /* Sombra solo a la izquierda */
+}
+
+.panel-izquierdo h2, 
+.panel-derecho h2 {
+    color: #ff9800;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* --- 3. PANEL CENTRAL --- */
+.panel-central {
+    width: 45%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.header h1 {
+    font-size: 2.5em;
+    color: #fff;
+    text-shadow: 2px 2px #000;
+}
+
+/* Área de la galleta (necesita position: relative para la Galleta Dorada) */
+.galleta-area {
+    position: relative; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contador {
+    font-size: 3em;
+    font-weight: bold;
+    color: #ffcc00;
+    margin: 10px 0;
+    text-shadow: 1px 1px 3px #000;
+}
+
+.cps-display, .cpc-display {
+    font-size: 1.2em;
+    color: #4CAF50;
+    margin-bottom: 5px;
+}
+
+/* --- 4. BOTÓN DE LA GALLETA PRINCIPAL --- */
+
+.boton-galleta-principal {
+    width: 280px;
+    height: 280px;
     border-radius: 50%;
-    background-image: url(/galleta.png);
+    background-image: url(/galleta.png); 
     background-repeat: no-repeat;
     background-size: contain;
-}
-.cookiecontainer{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-}
-
-.cps-display {
-    font-size: 1.2em;
-    color: #4CAF50; 
-    margin-bottom: 20px;
-}
-
-
-.mejoras-container {
+    
+    border: 10px solid #c99c5e;
+    box-shadow: 0 0 30px rgba(255, 165, 0, 0.8), 0 10px 15px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.1s;
     margin-top: 30px;
-    padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 8px;
-    width: 80%; 
-    max-width: 400px;
-    text-align: center;
+    outline: none;
 }
 
+.boton-galleta-principal:active {
+    transform: scale(0.95); 
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.5), 0 5px 8px rgba(0, 0, 0, 0.4);
+}
 
-.mejora-card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 6px;
-    background-color: #fff;
+/* --- 5. GALLETA DORADA (Evento Espontáneo) --- */
+
+.golden-cookie-wrapper {
+    position: absolute; 
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 100; 
+    animation: appear 0.5s ease-out; 
+}
+
+.golden-cookie-button {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background-color: gold; 
+    border: 8px solid orange;
+    box-shadow: 0 0 25px gold, 0 0 10px yellow, 0 5px 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    animation: pulse 1s infinite alternate; 
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-.mejora-titulo {
-    font-weight: bold;
-    margin: 0;
+.golden-cookie-text {
+    font-weight: 900;
+    color: #8B4513; 
+    font-size: 1.5em;
+    text-shadow: 1px 1px 0px white;
 }
 
-.mejora-stats {
-    font-size: 0.9em;
-    color: #666;
+/* --- 6. ESTILOS DE TARJETAS Y COMPRAS --- */
+
+.mejora-card, .edificio-card {
+    border: 1px solid #444;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    background-color: #333;
+    transition: background-color 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.mejora-card:hover, .edificio-card:hover {
+    background-color: #444; 
+    border-color: #ff9800;
+}
+
+.edificio-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.edificio-cantidad {
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.mejora-stats-comprado {
+    color: #4CAF50;
+    font-weight: bold;
     margin: 5px 0;
 }
 
-.btn-comprar {
-    background-color: #007bff;
+.separador {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #ff9800, rgba(255, 255, 255, 0));
+    margin: 15px 0;
+}
+
+.btn-comprar, .btn-comprar-edificio {
+    width: 100%; 
+    background-color: #007bff; 
     color: white;
     border: none;
-    padding: 8px 15px;
+    padding: 10px;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 5px;
+    margin-top: 8px;
     transition: background-color 0.3s;
 }
 
-.btn-comprar:disabled {
-    background-color: #ccc;
+.btn-comprar:disabled, .btn-comprar-edificio:disabled {
+    background-color: #555; 
+    color: #aaa;
     cursor: not-allowed;
+}
+
+/* --- 7. RESPONSIVENESS PARA MÓVILES Y TABLETS (< 900px) --- */
+@media (max-width: 900px) {
+    .juego-container {
+        flex-direction: column; 
+        align-items: center;
+        gap: 30px; 
+        /* Padding horizontal CERO en móvil también */
+        padding: 15px 0; 
+        /* Revertimos el bloqueo de scroll principal para móvil */
+        height: auto; 
+        overflow: visible; 
+    }
+
+    /* Los paneles ocupan todo el ancho, sin scroll interno ni bordes especiales */
+    .panel-izquierdo, 
+    .panel-derecho, 
+    .panel-central {
+        width: 100%; 
+        min-width: unset; 
+        padding: 15px;
+        max-height: unset; 
+        overflow-y: visible; 
+        margin: 0; 
+        border-radius: 0;
+        box-shadow: none; 
+        border: none;
+    }
+    
+    /* Reordenamiento para móvil */
+    .panel-central { order: -1; } 
+    .panel-izquierdo { order: 0; }  
+    .panel-derecho { order: 1; }   
+
+    /* Ajuste del tamaño de la galleta principal para pantallas pequeñas */
+    .boton-galleta-principal {
+        width: 200px;
+        height: 200px;
+    }
+    
+    #contador {
+        font-size: 2.5em;
+    }
+}
+
+/* --- 8. KEYFRAMES (ANIMACIONES) --- */
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { 
+        transform: scale(1.05);
+        box-shadow: 0 0 35px gold, 0 0 15px yellow, 0 5px 10px rgba(0, 0, 0, 0.6);
+    }
+}
+@keyframes appear {
+    from { opacity: 0; transform: scale(0.5) translate(-50%, -50%); }
+    to { opacity: 1; transform: scale(1) translate(-50%, -50%); }
 }

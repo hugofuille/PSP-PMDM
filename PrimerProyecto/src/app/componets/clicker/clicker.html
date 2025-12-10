@@ -1,27 +1,71 @@
-<div class="cookiecontainer">
-    <h1>COOKIE CLICKER</h1>
+<div class="juego-container">
     
-    <p id="contador">{{ numero | number:'1.0-1' }} Galletas</p> 
-    <p class="cps-display">Ganancia Pasiva: {{ cps | number:'1.0-1' }} CPS</p>
-
-    <button (click)="sumar()" class="boton"></button>
-
-    <hr>
-    
-    <div class="mejoras-container">
-        <h2>Tienda de Mejoras</h2>
+    <div class="panel-izquierdo">
+        <h2>🖱️ Mejoras de Click</h2>
+        <p class="cpc-display">Ganancia por Click (CPC): **{{ cpc }}**</p>
+        <hr class="separador">
         
         <div class="mejora-card" 
-             *ngFor="let mejora of mejorasDisponibles">
+             *ngFor="let mejora of mejorasCPC">
             
-            <p class="mejora-titulo">{{ mejora.nombre }} (x{{ mejora.cantidad }})</p>
-            <p class="mejora-stats">+{{ mejora.gananciaPorSegundo }} CPS | Costo: {{ mejora.costo }}</p>
+            <p class="mejora-titulo">{{ mejora.nombre }}</p>
+            <p *ngIf="!mejora.comprado" class="mejora-stats">
+                Aumenta el CPC en +{{ mejora.aumentoCPC }} | Costo: {{ mejora.costo | number:'1.0-0' }}
+            </p>
+            <p *ngIf="mejora.comprado" class="mejora-stats-comprado">✅ ¡Comprado!</p>
             
             <button 
-                (click)="comprarMejora(mejora)" 
-                [disabled]="numero < mejora.costo" 
+                (click)="comprarMejoraClick(mejora)" 
+                [disabled]="numero < mejora.costo || mejora.comprado"
                 class="btn-comprar">
                 Comprar
+            </button>
+        </div>
+    </div>
+
+    <div class="panel-central">
+        <div class="header">
+            <h1>🍪 COOKIE CLICKER</h1>
+            <p class="cps-display">CPS Pasivo: **{{ cps | number:'1.0-1' }}**</p>
+        </div>
+
+        <div class="galleta-area">
+            <p id="contador">{{ numero | number:'1.0-0' }} Galletas</p> 
+            
+            <button (click)="sumar()" class="boton-galleta-principal"></button>
+
+            <div *ngIf="goldenCookieActive" class="golden-cookie-wrapper">
+                <button 
+                    (click)="clickGoldenCookie()" 
+                    class="golden-cookie-button">
+                    <span class="golden-cookie-text">¡CLICK!</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel-derecho">
+        <h2>🏭 Tienda de Edificios</h2>
+        <hr class="separador">
+        
+        <div class="edificio-card" 
+             *ngFor="let edificio of edificiosDisponibles">
+            
+            <div class="edificio-info">
+                <p class="edificio-titulo">{{ edificio.nombre }}</p>
+                <p class="edificio-cantidad">**x{{ edificio.cantidad }}**</p>
+            </div>
+
+            <p class="edificio-stats">
+                +{{ edificio.gananciaPorSegundo | number:'1.0-1' }} CPS base
+            </p>
+            
+            <button 
+                (click)="comprarEdificio(edificio)" 
+                [disabled]="numero < edificio.costo" 
+                class="btn-comprar-edificio">
+                Costo: {{ edificio.costo | number:'1.0-0' }}
             </button>
         </div>
     </div>
